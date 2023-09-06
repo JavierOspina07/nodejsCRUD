@@ -1,8 +1,8 @@
 import express from 'express'
 import db from './utils/database.js'
-import Note from './models/noteModel.js'
+import Todo from './models/todoModel.js'
 
-Note
+Todo
 
 // authenticate and sincronization
 const PORT = 8000
@@ -24,62 +24,62 @@ app.get('/', (req, res) => {
   res.send('OK')
 })
 
-// Note management
+// Todo management
 
-// POST => notes
+// POST => Todos
 
-app.post('/notes', async (req, res) => {
+app.post('/todos', async (req, res) => {
   try {
     const { body } = req
-    const note = await Note.create(body)
-    res.status(201).json(note)
+    const todos = await Todo.create(body)
+    res.status(201).json(todos)
   } catch (err) {
     res.status(400).json(err)
   }
 })
 
-//GET => all Notes
+//GET => all Todos
 
-app.get('/notes', async (req, res) => {
+app.get('/todos', async (req, res) => {
   try {
-    const notes = await Note.findAll()
-    res.json(notes)
+    const todos = await Todo.findAll()
+    res.json(todos)
   } catch (err) {
     res.status(400).json(err)
   }
 })
 
-//GET => Notes by id
+//GET => Todos by id
 
-app.get('/notes/:id', async (req, res) => {
+app.get('/todos/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const note = await Note.findByPk(id)
-    res.json(note)
+    const todos = await Todo.findByPk(id)
+    res.json(todos)
   } catch (err) {
     res.status(400).json(err)
   }
 })
 
-//PUT => Notes
-app.put('/notes/:id', async (req, res) => {
+//PUT => Todos
+app.put('/todos/:id', async (req, res) => {
   try {
     const { id } = req.params
     const { body } = req
-    const note = await Note.update(body, {
+    const todos = await Todo.update(body, {
       where: { id },
     })
-    res.json(note)
+    res.json(todos)
   } catch (err) {
     res.status(400).json(err)
   }
 })
 
-//DEL => Notes
-app.delete('/notes/:id', async (req, res) => {
+//DEL => Todos
+app.delete('/todos/:id', async (req, res) => {
   try {
     const { id } = req.params
-    await Note.destroy({
+    await Todo.destroy({
       where: { id },
     })
     res.status(204).end()
@@ -92,3 +92,5 @@ app.delete('/notes/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Se esta ejecutando el servidor ${PORT}`)
 })
+
+
