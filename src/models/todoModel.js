@@ -1,7 +1,7 @@
 import {DataTypes} from 'sequelize'
 import db from '../utils/database.js'
 
-const Todo = db.define('Todo', {
+const Todo = db.define('todos', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
